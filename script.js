@@ -74,7 +74,7 @@ function iniciarJogo(){
 
     let newHead = {
         x: snakeX,
-        y: SnakeY
+        y: snakeY
     }
 
     snake.unshift(newHead);

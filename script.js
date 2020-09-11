@@ -7,6 +7,25 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 }
+
+
+// load audio files
+
+let dead = new Audio();
+let eat = new Audio();
+let up = new Audio();
+let right = new Audio();
+let left = new Audio();
+let down = new Audio();
+
+dead.src = "audio/dead.mp3";
+eat.src = "audio/eat.mp3";
+up.src = "audio/up.mp3";
+right.src = "audio/right.mp3";
+left.src = "audio/left.mp3";
+down.src = "audio/down.mp3";
+
+
 let direction = "right";
 let food = {
     x: Math.floor(Math.random() * 15 + 1) * box,
@@ -32,11 +51,21 @@ function drawFood(){
 
 document.addEventListener('keydown', update);
 
-function update(event){
-    if(event.keyCode == 37 && direction != "right") direction = "left";
-    if(event.keyCode == 38 && direction != "down") direction = "up";
-    if(event.keyCode == 39 && direction != "left") direction = "right";
-    if(event.keyCode == 40 && direction != "up") direction = "down";
+function update (event){
+    if (event.keyCode == 37 && direction != "right"){
+        left.play();
+        direction = "left";
+    }else if (event.keyCode == 38 && direction != "down"){
+        up.play();
+        direction = "up";
+    } else if (event.keyCode == 39 && direction != "left"){
+        direction = "right";
+        right.play();
+    }else if (event.keyCode == 40 && direction != "up"){
+        direction = "down";
+        down.play();
+    } 
+
 }
 
 function iniciarJogo(){
@@ -44,6 +73,7 @@ function iniciarJogo(){
     
     for(i = 1; i < snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            dead.play();
             clearInterval(jogo);
             alert('Game Over :(');
         }

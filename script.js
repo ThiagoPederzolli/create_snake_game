@@ -1,4 +1,5 @@
 let canvas = document.getElementById("snake");
+
 let context = canvas.getContext("2d");
 let box = 32;
 let snake = [];
@@ -40,12 +41,7 @@ function update(event){
 
 function iniciarJogo(){
 
-
-    if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
-    if(snake[0].x < 0 * box && direction == "left") snake[0].x = 16;
-    if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
-    if(snake[0].y < 0 * box && direction == "up") snake[0].y = 16;
-
+    
     for(i = 1; i < snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
@@ -71,6 +67,11 @@ function iniciarJogo(){
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
     }
+    //evoluir para nível hard, ao invés de mudar a posição, direcionar para um game over!
+    if(snakeX > 15 * box && direction == "right") snakeX = 0;
+    if(snakeX < 0 && direction == "left") snakeX = 15 * box;
+    if(snakeY > 15 * box && direction == "down") snakeY = 0;
+    if(snakeY < 0 && direction == "up") snakeY = 15 * box;
 
     let newHead = {
         x: snakeX,
